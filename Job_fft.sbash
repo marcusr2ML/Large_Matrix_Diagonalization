@@ -1,0 +1,23 @@
+#!/bin/bash
+#
+#SBATCH --time=04:00:00
+#SBATCH --nodes=1
+#SBATCH --exclusive
+#SBATCH --mem=0
+#SBATCH --mincpus=63
+#SBATCH --job-name=BatchFFT
+#SBATCH --partition=physics,secondary,secondary-eth
+#SBATCH --output=fft.o%j
+##SBATCH --error=fac.e%j
+##SBATCH --mail-user=marcusr2@illinois.edu
+##SBATCH --mail-type=BEGIN,END
+#
+# End of embedded SBATCH options
+#
+
+
+# Usage: sbatch Job_fft.sbash <N> <result directory> <output name> <ee>
+
+module load python/3
+
+stdbuf --output=L python3 BatchKw_fft.py $1 $2 $3 $4
