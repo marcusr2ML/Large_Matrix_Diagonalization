@@ -1,0 +1,16 @@
+In file included from ../src/InternalInclude.h:34,
+                 from ../src/Factorize.cpp:1:
+../src/Utils.h: In instantiation of 'void saveLU(Eigen::SparseLU<Eigen::SparseMatrix<Scalar> >&, RealType) [with Scalar = std::complex<float>; RealType = float; typename Eigen::SparseMatrix<Scalar>::StorageIndex = int]':
+../src/Factorize.cpp:122:13:   required from here
+../src/Utils.h:124:39: warning: narrowing conversion of 'L.Eigen::SparseMatrix<std::complex<float>, 1, int>::<anonymous>.Eigen::SparseCompressedBase<Eigen::SparseMatrix<std::complex<float>, 1, int> >::nonZeros()' from 'Eigen::Index' {aka 'long int'} to 'long unsigned int' [-Wnarrowing]
+  124 |   unsigned long shape[1] = {L.nonZeros()};
+      |                             ~~~~~~~~~~^~
+../src/Utils.h:130:25: warning: narrowing conversion of 'U.Eigen::SparseMatrix<std::complex<float>, 1, int>::<anonymous>.Eigen::SparseCompressedBase<Eigen::SparseMatrix<std::complex<float>, 1, int> >::nonZeros()' from 'Eigen::Index' {aka 'long int'} to 'long unsigned int' [-Wnarrowing]
+  130 |   shape[0] = {U.nonZeros()};
+      |               ~~~~~~~~~~^~
+../src/Utils.h:137:24: warning: narrowing conversion of 'perm.Eigen::Matrix<int, -1, 1>::<anonymous>.Eigen::PlainObjectBase<Eigen::Matrix<int, -1, 1> >::rows()' from 'Eigen::Index' {aka 'long int'} to 'long unsigned int' [-Wnarrowing]
+  137 |   shape[0] = {perm.rows()};
+      |               ~~~~~~~~~^~
+../src/Utils.h:141:24: warning: narrowing conversion of 'perm.Eigen::Matrix<int, -1, 1>::<anonymous>.Eigen::PlainObjectBase<Eigen::Matrix<int, -1, 1> >::rows()' from 'Eigen::Index' {aka 'long int'} to 'long unsigned int' [-Wnarrowing]
+  141 |   shape[0] = {perm.rows()};
+      |               ~~~~~~~~~^~

@@ -1,0 +1,10 @@
+../src/Solve.cpp: In lambda function:
+../src/Solve.cpp:170:48: warning: narrowing conversion of '(resE.Eigen::Matrix<float, -1, 1>::<anonymous>.Eigen::PlainObjectBase<Eigen::Matrix<float, -1, 1> >::rows() - 1)' from 'Eigen::Index' {aka 'long int'} to 'long unsigned int' [-Wnarrowing]
+  170 |         unsigned long shapeE[1] = {resE.rows() - 1};
+      |                                    ~~~~~~~~~~~~^~~
+../src/Solve.cpp:173:45: warning: narrowing conversion of 'resV.Eigen::Matrix<std::complex<float>, -1, -1>::<anonymous>.Eigen::PlainObjectBase<Eigen::Matrix<std::complex<float>, -1, -1> >::rows()' from 'Eigen::Index' {aka 'long int'} to 'long unsigned int' [-Wnarrowing]
+  173 |         unsigned long shapeV[2] = {resV.rows(), resV.cols() - 1};
+      |                                    ~~~~~~~~~^~
+../src/Solve.cpp:173:61: warning: narrowing conversion of '(resV.Eigen::Matrix<std::complex<float>, -1, -1>::<anonymous>.Eigen::PlainObjectBase<Eigen::Matrix<std::complex<float>, -1, -1> >::cols() - 1)' from 'Eigen::Index' {aka 'long int'} to 'long unsigned int' [-Wnarrowing]
+  173 |         unsigned long shapeV[2] = {resV.rows(), resV.cols() - 1};
+      |                                                 ~~~~~~~~~~~~^~~
