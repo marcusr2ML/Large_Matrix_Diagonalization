@@ -1,0 +1,34 @@
+#!/bin/bash
+#
+#SBATCH --time=04:00:00
+#SBATCH --nodes=1
+#SBATCH --exclusive
+#SBATCH --mem=0
+#SBATCH --job-name=slvN400
+#SBATCH --partition=secondary,secondary-eth
+#SBATCH --output=solve.o%j
+##SBATCH --error=solve.e%j
+##SBATCH --mail-user=marcusr2@illinois.edu
+##SBATCH --mail-type=BEGIN,END
+#
+# End of embedded SBATCH options
+#
+
+# Usage: sbatch -d afterok:<jobid> --gres=gpu:<gpu>:<#gpu> Job_solve.sbash <directory of LUs> [double] 
+
+module load gcc/.12.2.0
+module load cuda/.11.7
+
+PHYSDIR=$PWD
+SRC=solver-cpp
+RUNDIR=$PHYSDIR/$1
+
+cd $PHYSDIR/$SRC
+echo $PWD
+git pull
+./compile_solve.sh $2 2>&1 | tee build/compile_output_solve.txt
+
+mkdir -p $RUNDIR
+cp $PHYSDIR/$SRC/build/solve $RUNDIR/
+cd $RUNDIR 
+stdbuf --output=L ../launch_solve.sh 2>&1 | tee solve.log

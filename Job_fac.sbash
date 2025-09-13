@@ -1,0 +1,38 @@
+#!/bin/bash
+#
+#SBATCH --time=04:00:00
+#SBATCH --nodes=1
+#SBATCH --exclusive
+#SBATCH --mem-per-cpu=3277M
+#SBATCH --mincpus=63
+#SBATCH --job-name=facN400
+#SBATCH --partition=physics,secondary,secondary-eth
+#SBATCH --output=fac.o%j
+##SBATCH --error=fac.e%j
+##SBATCH --mail-user=marcusr2@illinois.edu
+##SBATCH --mail-type=BEGIN,END
+#
+# End of embedded SBATCH options
+#
+
+
+# Usage: sbatch Job_fac.sbash <interval file> [double]
+
+module load gcc/.12.2.0
+
+PHYSDIR=$PWD
+SRC=solver-cpp
+IFS=.
+read -a fnarr <<< "$1"
+ITVNAME="${fnarr[0]}"
+unset IFS
+RUNDIR=$PHYSDIR/fac-$ITVNAME
+
+cd $PHYSDIR/$SRC
+git pull
+./compile_fac.sh $2 2>&1 | tee build/compile_output_fac.txt
+
+mkdir -p $RUNDIR
+cp $PHYSDIR/$SRC/build/factorize $RUNDIR/
+cd $RUNDIR 
+stdbuf --output=L ../launch_fac.sh $1 2>&1 | tee fac.log
